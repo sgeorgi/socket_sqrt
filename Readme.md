@@ -23,5 +23,4 @@ Run ``sbt test`` in a terminal to run the test/s
 
  * Refine SqrtSpec to actually use some mocking (framework is already included, see build.sbt)
  * Write Specs for both SocketServer and SocketHandler that simulate and verify the passing of messages between the actors
- * Use an "implicit" to convert Strings to ByteStrings automatically
  
