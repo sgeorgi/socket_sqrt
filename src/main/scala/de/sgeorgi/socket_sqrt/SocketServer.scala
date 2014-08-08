@@ -10,7 +10,11 @@ import akka.util.ByteString
 /**
  * Created by sgeorgi on 07.08.14.
  */
-class SocketServer(port: Int) extends Actor {
+trait Implicits {
+  implicit def string2ByteString(s: String): ByteString = ByteString(s)
+}
+
+class SocketServer(port: Int) extends Actor with Implicits {
 
   import akka.io.Tcp._
   import context.system
@@ -19,7 +23,7 @@ class SocketServer(port: Int) extends Actor {
 
   def receive = {
     case b@Bound(localAddress) =>
-      println("de.sgeorgi.socket_sqrt.SocketServer started")
+      println("SocketServer started")
 
     case CommandFailed(_: Bind) => context stop self
 
@@ -28,23 +32,22 @@ class SocketServer(port: Int) extends Actor {
       val connection = sender()
       connection ! Register(handler)
       println("Client registered")
-      sender() ! Write(ByteString("Type in 0 to exit, or any other Integer to get the square root for!\n"))
+      sender() ! Write("Type in 0 to exit, or any other Integer to get the square root for!\n")
   }
 }
 
-class SocketHandler extends Actor {
+class SocketHandler extends Actor with Implicits {
   def receive = {
-    case Received(data) => {
+    case Received(data) =>
       val number = data.decodeString("utf8").stripLineEnd.toInt
 
       number match {
-        case 0 => {
-          println("Client wished to disconnect")
+        case 0 =>
+          println("Client disconnected")
           context stop self
-        }
-        case _: Int => sender() ! Write(ByteString("Square root of " + number + " is " + Sqrt(number).toString + "\n\n"))
+        case _: Int => sender() ! Write("Square root of " + number + " is " + Sqrt(number).toString + "\n")
       }
-    }
     case PeerClosed => context stop self
   }
 }
+
