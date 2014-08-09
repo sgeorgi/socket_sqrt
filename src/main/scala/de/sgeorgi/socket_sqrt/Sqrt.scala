@@ -4,6 +4,7 @@ package de.sgeorgi.socket_sqrt
 /**
  * Created by sgeorgi on 07.08.14.
  */
+
 object Sqrt {
 
   def findSqrt(x: Int): Double = {

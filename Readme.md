@@ -13,7 +13,7 @@ Open up a terminal and execute `sbt run`. The SBT will download all necessary li
 a socket server on port 8000.
 
 Open another terminal and connect to the server with `telnet localhost 8000`. You can now type in arbitrary integers
-and get the square root back. Type in 0 to exit the session.
+and get the square root back. Type in 'exit' to exit the session.
 
 Stop the socket server with ctrl-c
 
@@ -23,4 +23,7 @@ Run ``sbt test`` in a terminal to run the test/s
 
  * Refine SqrtSpec to actually use some mocking (framework is already included, see build.sbt)
  * Write Specs for both SocketServer and SocketHandler that simulate and verify the passing of messages between the actors
+ * <s>Use an "implicit" to convert Strings to ByteStrings automatically</s>
+ * <s>Use an "implicit" to convert ByteStrings to String automatically</s>
+ * <s>Write input parser to extract an Int if possible, and make the SocketHandler use it</s>
  
