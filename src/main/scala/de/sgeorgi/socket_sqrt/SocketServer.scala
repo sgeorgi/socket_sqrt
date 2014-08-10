@@ -54,6 +54,7 @@ class SocketHandler extends Actor with Implicits {
 
   def receive = {
     case Received(data) =>
+      println("Received data")
       parseInput(data) match {
         case "exit" =>
           println("Client disconnected")
