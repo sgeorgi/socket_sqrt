@@ -11,14 +11,10 @@ import org.scalatest.{FunSpecLike, FunSpec, Matchers, BeforeAndAfterAll}
  */
 
 //class SocketHandlerSpec extends TestKit(ActorSystem("SocketHandlerSpec")) with fixture.FunSpec with ImplicitSender with  DefaultTimeout with Matchers with BeforeAndAfterAll {
-class SocketHandlerSpec(_system: ActorSystem) extends TestKit(_system) with FunSpecLike with Matchers with BeforeAndAfterAll  {
+class SocketHandlerSpec(_system: ActorSystem) extends TestKit(_system) with FunSpecLike with Matchers with StopSystemAfterAll  {
 
   def this() = this(ActorSystem("testsystem"))
   val actorRef = system.actorOf(Props(new SocketHandler))
-
-  override def afterAll() {
-    system.shutdown()
-  }
 
   describe("SocketHandler") {
     describe("receive[Int]") {
