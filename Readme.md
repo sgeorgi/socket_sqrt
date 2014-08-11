@@ -9,15 +9,13 @@ with to get the rounded square sums of random integers is probably not a kick-as
 
 ## Example usage
 
-Open up a terminal and execute `sbt run`. The SBT will download all necessary libraries and Scala itself, then start
-a socket server on port 8000.
+Open up a terminal and execute `sbt`. The SBT will download all necessary libraries and Scala itself, type in `reStart` to
+start the socket server, use `reStop` to stop.
 
 Open another terminal and connect to the server with `telnet localhost 8000`. You can now type in arbitrary integers
 and get the square root back. Type in 'exit' to exit the session.
 
-Stop the socket server with ctrl-c
-
-Run ``sbt test`` in a terminal to run the test/s
+Run ``sbt test`` in a terminal or `test` inside a running SBT session to run the test/s
 
 ## Next up
 
